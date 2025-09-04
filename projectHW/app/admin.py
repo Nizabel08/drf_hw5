@@ -17,6 +17,9 @@ def date_filtering(modeladmin, request, queryset) :
     today = timezone.now().date()
     return queryset.filter(created_at_date = today)
 
+@admin.action(description='mark selected users as non-admin') 
+def mark_as_non_admin(modeladmin, request, queryset) :
+    queryset.update(is_admin = False)
 
 @admin.register(User) 
 class UserAdmin(admin.ModelAdmin) :
@@ -25,7 +28,7 @@ class UserAdmin(admin.ModelAdmin) :
     search_fields = ('name', 'last_name')
     ordering = ('name',)
     list_editable = ('age',)
-    actions = [make_admin, date_filtering]
+    actions = [make_admin, mark_as_non_admin, date_filtering]
 
 
  

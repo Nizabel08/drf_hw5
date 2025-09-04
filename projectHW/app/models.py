@@ -10,7 +10,7 @@ class User(models.Model) :
     is_admin = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name, self.last_name
+        return f"{self.name} {self.last_name}"
     
 
 
